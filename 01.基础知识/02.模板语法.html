@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识Vue</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+
+    <!--
+        Vue模板语法有2大类：
+            1，插值语法：
+                功能：用于解析标签体内容。
+                写法：{{xxx}},xxx是js表达式，且可以直接读取到data中的所有属性。
+            2，指令语法
+                功能：用于解析标签（包括：标签属性，标签体内容，绑定事件...）
+                举例：v-bind:href="xxx" 或 简写为 :href="xxx",xxx同样要写js表达式，且可以直接读取到data中的所有属性。
+                备注：Vue中有很多指令，形式都是 v-xxx
+     -->
+
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h1>插值语法</h1>
+        <h3>你好，{{name}}</h3>
+        <hr>
+        <h1>指令语法</h1>
+        <a v-bind:href="blog.url.toUpperCase()">去{{blog.name}}博客1</a>
+        <a :href="blog.url">去{{blog.name}}博客2</a>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false; // 禁用提示
+        new Vue({
+            el: "#root",
+            data:{
+                name:'eryajf',
+                blog:{
+                    name:'二丫讲梵',
+                    url: 'https://wiki.eryajf.net'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

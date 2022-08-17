@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气案例-监视属性</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+
+
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+
+        <button @click="changeWeather">点我切换</button>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false; // 禁用提示
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                isHot: true,
+            },
+            computed:{
+                info(){
+                    return this.isHot ? '炎热' : '凉爽'
+                }
+            },
+            methods: {
+                changeWeather(){
+                    this.isHot = !this.isHot
+                }
+            },
+            watch:{
+                // 正常写法
+                isHot:{
+                    immediate:true, // 初始化时让handler调用一下
+                    // 当isHot发生改变时，handler会被调用
+                    handler(newValue,oldValue){
+                        console.log('isHot被修改了',newValue,oldValue);
+                    }
+                },
+                // 简写 当监听的对象中只有handler参数的时候，可以如下简写
+                isHot(newValue,oldValue){
+                    console.log('isHot被修改了',newValue,oldValue);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

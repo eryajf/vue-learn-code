@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分析生命周期</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root" :x="n">
+        <h2 v-text="n"></h2>
+        <h2>当前的n值为： {{n}}</h2>
+        <button @click="add">点我给n+1</button>
+        <button @click="bye">点我销毁</button>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false; // 禁用提示
+        new Vue({
+            el: '#root',
+            // template:` // 一般不用这种
+            // <div>
+            //     <h2>当前的n值为： {{n}}</h2>
+            //     <button @click="add">点我给n+1</button>
+            // </div>`,
+            data: {
+                n:1,
+            },
+            methods: {
+                add(){
+                    this.n++
+                },
+                bye(){
+                    console.log('bye');
+                    this.$destroy();
+                }
+            },
+            watch:{
+                n(){
+                    console.log('n 变了');
+                }
+            },
+            beforeCreate() {
+                console.log('beforeCreate');
+            },
+            created() {
+                console.log('created');
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate');
+            },
+            updated() {
+                console.log('updated');
+            },
+            beforeDestroy() {
+                console.log('beforeDestroy');
+            },
+            destroyed() {
+                console.log('destroyed');
+            },
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表过滤</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+
+
+    <!-- 准备好一个容器 -->
+    <div id="root">
+         <h2>测试遍历人员</h2>
+         <input type="text" placeholder="请输入用户名" v-model="keyWord">
+         <button @click="sortType = 2">年龄升序</button>
+         <button @click="sortType = 1">年龄降序</button>
+         <button @click="sortType = 0">原顺序</button>
+         <ul>
+             <li v-for="p in filterPersons" :key="p.id">
+                 {{p.name}}-{{p.age}}-{{p.sex}}
+             </li>
+         </ul>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false; // 禁用提示
+
+        new Vue({
+            el: '#root',
+            data: {
+                keyWord:'',
+                persons:[
+                    {id:'001',name:'马冬梅',age:18,sex:'女'},
+                    {id:'002',name:'周冬雨',age:29,sex:'女'},
+                    {id:'003',name:'周杰伦',age:20,sex:'男'},
+                    {id:'004',name:'温兆伦',age:31,sex:'男'},
+                ],
+                sortType:0,//0，原顺序，1，年龄降序，2，年龄升序
+            },
+            computed:{
+                filterPersons(){
+                    const arr = this.persons.filter((p)=>{
+                        return p.name.indexOf(this.keyWord) !== -1
+                    })
+                    // 判断是否需要排序
+                    if (this.sortType){
+                        arr.sort((p1,p2)=>{
+                            return this.sortType === 1 ? p2.age - p1.age : p1.age - p2.age
+                        })
+                    }
+                    return arr
+                }
+            }
+        });
+    </script>
+</body>
+</html>

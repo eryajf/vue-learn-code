@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内置指令-v-cloak</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!--
+        v-cloak指令(没有值)：
+            1.本质上是一个特殊属性，Vue示例创建完毕并接管容器后，会删掉v-cloak属性。
+            2.使用css配合v-cloak可以解决网络慢时页面展示出{{xx}}插值语法的问题.
+     -->
+
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <div v-cloak>{{name}}</div>
+    </div>
+    <script type="text/javascript" src="http://localhost:8080/resource/5s/vue.js"></script>
+</body>
+
+    <script type="text/javascript">
+        console.log('1');
+        Vue.config.productionTip = false; // 禁用提示
+        new Vue({
+            el: '#root',
+            data: {
+                name:'eryajf',
+            }
+        });
+    </script>
+</html>

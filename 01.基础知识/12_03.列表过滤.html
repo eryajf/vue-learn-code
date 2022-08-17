@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表过滤</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+
+
+    <!-- 准备好一个容器 -->
+    <div id="root">
+         <h2>测试遍历人员</h2>
+         <input type="text" placeholder="请输入用户名" v-model="keyWord">
+         <ul>
+             <li v-for="p in filterPersons" :key="p.id">
+                 {{p.name}}-{{p.age}}-{{p.sex}}
+             </li>
+         </ul>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false; // 禁用提示
+
+        // // 用watch实现
+        // new Vue({
+        //     el: '#root',
+        //     data: {
+        //         keyWord:'',
+        //         persons:[
+        //             {id:'001',name:'马冬梅',age:18,sex:'女'},
+        //             {id:'002',name:'周冬雨',age:19,sex:'女'},
+        //             {id:'003',name:'周杰伦',age:20,sex:'男'},
+        //             {id:'004',name:'温兆伦',age:21,sex:'男'},
+        //         ],
+        //         filterPersons:[]
+        //     },
+        //     watch:{
+        //         keyWord:{
+        //             immediate: true,
+        //             handler(val){
+        //                 this.filterPersons = this.persons.filter((p)=>{
+        //                     return p.name.indexOf(val) !== -1
+        //                 })
+        //             }
+        //         }
+        //     }
+        // });
+        // 用computed实现
+        new Vue({
+            el: '#root',
+            data: {
+                keyWord:'',
+                persons:[
+                    {id:'001',name:'马冬梅',age:18,sex:'女'},
+                    {id:'002',name:'周冬雨',age:19,sex:'女'},
+                    {id:'003',name:'周杰伦',age:20,sex:'男'},
+                    {id:'004',name:'温兆伦',age:21,sex:'男'},
+                ],
+            },
+            computed:{
+                filterPersons(){
+                    return this.persons.filter((p)=>{
+                        return p.name.indexOf(this.keyWord) !== -1
+                    })
+                }
+            }
+        });
+    </script>
+</body>
+</html>

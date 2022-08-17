@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>监测数据改变的原理_对象</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+
+
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h2>学校名称：{{name}} </h2>
+        <h2>学校地址：{{address}} </h2>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false; // 禁用提示
+
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name:'尚硅谷',
+                address:'北京',
+                // 如下信息通过控制台输出 vm 查看
+                student:{
+                    name:'tom',
+                    age:{
+                        rAge:40,
+                        SAge:29
+                    },
+                    friends:[
+                        {name:'jerry',age:34}
+                    ]
+                }
+            },
+        });
+    </script>
+</body>
+</html>
